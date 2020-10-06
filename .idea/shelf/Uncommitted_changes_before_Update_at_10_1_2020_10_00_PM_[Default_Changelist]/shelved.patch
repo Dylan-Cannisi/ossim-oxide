@@ -1,0 +1,72 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"CMakeRunConfigurationManager\" shouldGenerate=\"true\" shouldDeleteObsolete=\"true\">\r\n    <generated />\r\n  </component>\r\n  <component name=\"CMakeSettings\">\r\n    <configurations>\r\n      <configuration PROFILE_NAME=\"Debug\" CONFIG_NAME=\"Debug\" />\r\n    </configurations>\r\n  </component>\r\n  <component name=\"CargoProjects\">\r\n    <cargoProject FILE=\"$PROJECT_DIR$/Cargo.toml\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"75df77e6-7797-4c30-a66a-244727097d4b\" name=\"Default Changelist\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/modules.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/ossim-oxide.iml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/apps/ossim_info.rs\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/image/mod.rs\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/jpeg2000/jpeg2000decoder.rs\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/jpeg2000/mod.rs\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/nitf/mod.rs\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ClangdSettings\">\r\n    <option name=\"formatViaClangd\" value=\"false\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Rust File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MacroExpansionManager\">\r\n    <option name=\"directoryName\" value=\"0rg0v3x7\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1i4gm2UTuSd78EQ4Y4ns8XMPVxj\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"ASKED_SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"cf.first.check.clang-format\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/src\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.path.for.package.eslint\" value=\"project\" />\r\n    <property name=\"node.js.path.for.package.tslint\" value=\"project\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n    <property name=\"org.rust.cargo.project.model.PROJECT_DISCOVERY\" value=\"true\" />\r\n    <property name=\"org.rust.disableDetachedFileInspectionC:/Users/DTCan/CLionProjects/ossim-oxide/src/apps/ossim_info.rs\" value=\"true\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"CPPToolchains\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\DTCan\\CLionProjects\\ossim-oxide\\src\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Cargo.Test Oxide-Info\">\r\n    <configuration name=\"Test Oxide-Info\" type=\"CargoCommandRunConfiguration\" factoryName=\"Cargo Command\">\r\n      <option name=\"channel\" value=\"DEFAULT\" />\r\n      <option name=\"command\" value=\"run --bin ossim-info D:\\NITFExamples\\18APR20204709-P1BS-058692665010_01_P001.NTF\" />\r\n      <option name=\"allFeatures\" value=\"false\" />\r\n      <option name=\"emulateTerminal\" value=\"false\" />\r\n      <option name=\"backtrace\" value=\"SHORT\" />\r\n      <option name=\"workingDirectory\" value=\"file://$PROJECT_DIR$\" />\r\n      <envs />\r\n      <method v=\"2\">\r\n        <option name=\"CARGO.BUILD_TASK_PROVIDER\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Test\" type=\"CargoCommandRunConfiguration\" factoryName=\"Cargo Command\">\r\n      <option name=\"channel\" value=\"DEFAULT\" />\r\n      <option name=\"command\" value=\"test --package ossim_oxide --lib tests\" />\r\n      <option name=\"allFeatures\" value=\"false\" />\r\n      <option name=\"emulateTerminal\" value=\"false\" />\r\n      <option name=\"backtrace\" value=\"SHORT\" />\r\n      <option name=\"workingDirectory\" value=\"file://$PROJECT_DIR$\" />\r\n      <envs />\r\n      <method v=\"2\">\r\n        <option name=\"CARGO.BUILD_TASK_PROVIDER\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Cargo.Test\" />\r\n      <item itemvalue=\"Cargo.Test Oxide-Info\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"RustProjectSettings\">\r\n    <option name=\"toolchainHomeDirectory\" value=\"$USER_HOME$/.cargo/bin\" />\r\n    <option name=\"version\" value=\"2\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"75df77e6-7797-4c30-a66a-244727097d4b\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1601172433687</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1601172433687</updated>\r\n      <workItem from=\"1601172435676\" duration=\"4484000\" />\r\n      <workItem from=\"1601393491812\" duration=\"4494000\" />\r\n      <workItem from=\"1601506072917\" duration=\"999000\" />\r\n      <workItem from=\"1601507589545\" duration=\"1738000\" />\r\n      <workItem from=\"1601509384401\" duration=\"1082000\" />\r\n      <workItem from=\"1601513660629\" duration=\"376000\" />\r\n      <workItem from=\"1601514052161\" duration=\"761000\" />\r\n      <workItem from=\"1601515066282\" duration=\"237000\" />\r\n      <workItem from=\"1601515313852\" duration=\"42000\" />\r\n      <workItem from=\"1601515399160\" duration=\"87000\" />\r\n      <workItem from=\"1601515512480\" duration=\"817000\" />\r\n      <workItem from=\"1601516980670\" duration=\"700000\" />\r\n      <workItem from=\"1601517695750\" duration=\"364000\" />\r\n      <workItem from=\"1601518070700\" duration=\"541000\" />\r\n      <workItem from=\"1601518624201\" duration=\"184000\" />\r\n      <workItem from=\"1601518908048\" duration=\"178000\" />\r\n      <workItem from=\"1601519096228\" duration=\"77000\" />\r\n      <workItem from=\"1601519181973\" duration=\"295000\" />\r\n      <workItem from=\"1601519487406\" duration=\"159000\" />\r\n      <workItem from=\"1601519656909\" duration=\"8000\" />\r\n      <workItem from=\"1601519720722\" duration=\"312000\" />\r\n      <workItem from=\"1601520085869\" duration=\"389000\" />\r\n      <workItem from=\"1601520485780\" duration=\"74000\" />\r\n      <workItem from=\"1601520568342\" duration=\"1228000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- a/.idea/workspace.xml	(revision 2dd36fe3d3641ee744c843b702b291a983c2db78)
++++ b/.idea/workspace.xml	(date 1601604009998)
+@@ -15,16 +15,7 @@
+     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="75df77e6-7797-4c30-a66a-244727097d4b" name="Default Changelist" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/ossim-oxide.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/apps/ossim_info.rs" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/image/mod.rs" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/jpeg2000/jpeg2000decoder.rs" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/jpeg2000/mod.rs" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/nitf/mod.rs" afterDir="false" />
+-    </list>
++    <list default="true" id="75df77e6-7797-4c30-a66a-244727097d4b" name="Default Changelist" comment="Init Commit" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -100,8 +91,8 @@
+       </method>
+     </configuration>
+     <list>
++      <item itemvalue="Cargo.Test Oxide-Info" />
+       <item itemvalue="Cargo.Test" />
+-      <item itemvalue="Cargo.Test Oxide-Info" />
+     </list>
+   </component>
+   <component name="RustProjectSettings">
+@@ -139,8 +130,23 @@
+       <workItem from="1601519720722" duration="312000" />
+       <workItem from="1601520085869" duration="389000" />
+       <workItem from="1601520485780" duration="74000" />
+-      <workItem from="1601520568342" duration="1228000" />
++      <workItem from="1601520568342" duration="1439000" />
++    </task>
++    <task id="LOCAL-00001" summary="Init Commit">
++      <created>1601523950221</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1601523950221</updated>
+     </task>
++    <task id="LOCAL-00002" summary="Init Commit">
++      <created>1601523964669</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1601523964669</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -158,4 +164,8 @@
+     </option>
+     <option name="oldMeFiltersMigrated" value="true" />
+   </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="Init Commit" />
++    <option name="LAST_COMMIT_MESSAGE" value="Init Commit" />
++  </component>
+ </project>
+\ No newline at end of file
