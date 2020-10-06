@@ -1,6 +1,7 @@
-use crate::image::{IsImageBuffer, IsImageDecoder, IsImageData};
-
 use std::io::Error;
+
+
+use crate::image::{IsImageBuffer, IsImageDecoder, IsImageData};
 
 
 impl IsImageBuffer for jp2k::ImageBuffer {

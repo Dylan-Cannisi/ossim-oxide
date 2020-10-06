@@ -1,3 +1,9 @@
+use std::fmt;
+use std::fs::File;
+use std::io::Read;
+use std::str::FromStr;
+
+
 extern crate nom;
 
 use nom::{
@@ -5,20 +11,111 @@ use nom::{
     bytes::complete::{tag, take},
     character::complete::one_of,
 };
-
-
-use std::fmt;
-use std::fs::File;
-use std::io::Read;
-use std::str::FromStr;
-
-
 use chrono::{Date, DateTime, NaiveDateTime, Utc, NaiveDate};
 
 
-pub trait Loadable {
-    type MyType;
-    fn load(filename: String) -> std::io::Result<Self::MyType>;
+use crate::image::Loadable;
+
+
+pub struct Nitf {
+    nitf_file_header:            NitfFileHeader,
+    nitf_image_subheader:        Vec<NitfImageSubheader>,
+    nitf_graphic_subheader:      Vec<NitfGraphicSubheader>,
+    nitf_reserved_subheader:     Vec<NitfReservedSubheader>,
+    nitf_text_subheader:         Vec<NitfTextSubheader>,
+    nitf_data_ext_subheader:     Vec<NitfDataExtSubheader>,
+    nitf_reserved_ext_subheader: Vec<NitfReservedExtSubheader>,
+}
+
+
+pub struct NitfFileHeader {
+    fhdr:    String,
+    fver:    String,
+    clevel:  u8,
+    stype:   String,
+    ostaid:  String,
+    fdt:     DateTime<Utc>,
+    ftitle:  String,
+    fsclas:  char,
+    fsclsy:  String,
+    fscode:  String,
+    fsctlh:  String,
+    fsrel:   String,
+    fsdctp:  String,
+    fsdcdt:  Option<Date<Utc>>,
+    fsdcxm:  String,
+    fsdg:    char,
+    fsdgdt:  Option<Date<Utc>>,
+    fsctlx:  String,
+    fscatp:  char,
+    fscaut:  String,
+    fscrsn:  char,
+    fssrdt:  Option<Date<Utc>>,
+    fsctln:  String,
+    fscop:   u32,
+    fscpys:  u32,
+    encryp:  u8,
+    fbkgc_r: u8,
+    fbkgc_g: u8,
+    fbkgc_b: u8,
+    oname:   String,
+    ophone:  String,
+    fl:      usize,
+    hl:      usize,
+    numi:    usize,
+    lish:    Vec<usize>,
+    li:      Vec<usize>,
+    nums:    usize,
+    lssh:    Vec<usize>,
+    ls:      Vec<usize>,
+    numx:    usize,
+    numt:    usize,
+    ltsh:    Vec<usize>,
+    lt:      Vec<usize>,
+    numdes:  usize,
+    ldsh:    Vec<usize>,
+    ld:      Vec<usize>,
+    numres:  usize,
+    lresh:   Vec<usize>,
+    lre:     Vec<usize>,
+    udhdl:   usize,
+    udhofl:  Option<usize>,
+    udhd:    Option<Vec<u8>>,
+    xhdl:    usize,
+    xhdlofl: Option<usize>,
+    xhd:     Option<Vec<u8>>,
+}
+
+
+pub struct NitfImageSubheader {
+    im:     String,
+    iid1:   String,
+    idatim: DateTime<Utc>,
+}
+
+
+pub struct NitfGraphicSubheader {
+
+}
+
+
+pub struct NitfReservedSubheader {
+
+}
+
+
+pub struct NitfTextSubheader {
+
+}
+
+
+pub struct NitfDataExtSubheader {
+
+}
+
+
+pub struct NitfReservedExtSubheader {
+
 }
 
 
@@ -375,106 +472,4 @@ fn nitf_data_ext_subheader_parser(input: &[u8]) -> IResult<&[u8], NitfDataExtSub
 
 fn nitf_reserved_ext_subheader_parser(input: &[u8]) -> IResult<&[u8], NitfReservedExtSubheader> {
     Ok((input, NitfReservedExtSubheader {}))
-}
-
-
-pub struct Nitf {
-    nitf_file_header:            NitfFileHeader,
-    nitf_image_subheader:        Vec<NitfImageSubheader>,
-    nitf_graphic_subheader:      Vec<NitfGraphicSubheader>,
-    nitf_reserved_subheader:     Vec<NitfReservedSubheader>,
-    nitf_text_subheader:         Vec<NitfTextSubheader>,
-    nitf_data_ext_subheader:     Vec<NitfDataExtSubheader>,
-    nitf_reserved_ext_subheader: Vec<NitfReservedExtSubheader>,
-}
-
-
-pub struct NitfFileHeader {
-    fhdr:    String,
-    fver:    String,
-    clevel:  u8,
-    stype:   String,
-    ostaid:  String,
-    fdt:     DateTime<Utc>,
-    ftitle:  String,
-    fsclas:  char,
-    fsclsy:  String,
-    fscode:  String,
-    fsctlh:  String,
-    fsrel:   String,
-    fsdctp:  String,
-    fsdcdt:  Option<Date<Utc>>,
-    fsdcxm:  String,
-    fsdg:    char,
-    fsdgdt:  Option<Date<Utc>>,
-    fsctlx:  String,
-    fscatp:  char,
-    fscaut:  String,
-    fscrsn:  char,
-    fssrdt:  Option<Date<Utc>>,
-    fsctln:  String,
-    fscop:   u32,
-    fscpys:  u32,
-    encryp:  u8,
-    fbkgc_r: u8,
-    fbkgc_g: u8,
-    fbkgc_b: u8,
-    oname:   String,
-    ophone:  String,
-    fl:      usize,
-    hl:      usize,
-    numi:    usize,
-    lish:    Vec<usize>,
-    li:      Vec<usize>,
-    nums:    usize,
-    lssh:    Vec<usize>,
-    ls:      Vec<usize>,
-    numx:    usize,
-    numt:    usize,
-    ltsh:    Vec<usize>,
-    lt:      Vec<usize>,
-    numdes:  usize,
-    ldsh:    Vec<usize>,
-    ld:      Vec<usize>,
-    numres:  usize,
-    lresh:   Vec<usize>,
-    lre:     Vec<usize>,
-    udhdl:   usize,
-    udhofl:  Option<usize>,
-    udhd:    Option<Vec<u8>>,
-    xhdl:    usize,
-    xhdlofl: Option<usize>,
-    xhd:     Option<Vec<u8>>,
-}
-
-
-pub struct NitfImageSubheader {
-    im:     String,
-    iid1:   String,
-    idatim: DateTime<Utc>,
-}
-
-
-pub struct NitfGraphicSubheader {
-
-}
-
-
-pub struct NitfReservedSubheader {
-
-}
-
-
-pub struct NitfTextSubheader {
-
-}
-
-
-pub struct NitfDataExtSubheader {
-
-}
-
-
-pub struct NitfReservedExtSubheader {
-
 }

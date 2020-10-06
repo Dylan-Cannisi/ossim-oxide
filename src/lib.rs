@@ -1,6 +1,8 @@
 pub mod image;
 pub mod jpeg2000;
 pub mod nitf;
+pub mod tiff;
+
 
 #[cfg(test)]
 mod tests {

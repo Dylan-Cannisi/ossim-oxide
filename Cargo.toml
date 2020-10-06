@@ -8,6 +8,10 @@ edition = "2018"
 name = "ossim-info"
 path = "src/apps/ossim_info.rs"
 
+[[bin]]
+name = "ossim-image-viewer"
+path = "src/apps/ossim_image_viewer.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
