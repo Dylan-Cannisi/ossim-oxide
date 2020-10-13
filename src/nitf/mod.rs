@@ -5,16 +5,27 @@ use std::str::FromStr;
 
 
 extern crate nom;
-
 use nom::{
-    IResult,
     bytes::complete::{tag, take},
     character::complete::one_of,
+    IResult,
+    lib::std::collections::HashMap,
 };
+
 use chrono::{Date, DateTime, NaiveDateTime, Utc, NaiveDate};
 
 
 use crate::image::Loadable;
+
+
+fn nitf_tre_parser(input: &[u8]) -> IResult<&[u8], (usize, String, Vec<u8>)> {
+    let (input, key_t) = take(6 as u64)(input)?;
+    let key = std::str::from_utf8(&key_t).unwrap().trim().parse().unwrap();
+    let (input, size_t) = take(5 as u64)(input)?;
+    let size = usize::from_str(std::str::from_utf8(&size_t).unwrap()).unwrap();
+    let (input, value) = take(size)(input)?;
+    Ok((input, (size+11,key,value.to_vec())))
+}
 
 
 pub struct Nitf {
@@ -80,10 +91,10 @@ pub struct NitfFileHeader {
     lre:     Vec<usize>,
     udhdl:   usize,
     udhofl:  Option<usize>,
-    udhd:    Option<Vec<u8>>,
+    udhd:    Option<HashMap<String,Vec<u8>>>,
     xhdl:    usize,
     xhdlofl: Option<usize>,
-    xhd:     Option<Vec<u8>>,
+    xhd:     Option<HashMap<String,Vec<u8>>>,
 }
 
 
@@ -207,7 +218,33 @@ impl fmt::Display for NitfFileHeader {
             retval = format!("{}NITF::LRE{:03}: {}\n", retval, i, &self.lre[i]);
         }
         retval = format!("{}NITF::UDHDL: {}\n", retval, &self.udhdl);
+        retval = match &self.udhofl {
+            Some(t) => format!("{}NITF::UDHOFL: {}\n", retval, &t),
+            None => retval,
+        };
+        retval = match &self.udhd {
+            Some(t) => {
+                for (key, value) in &*t {
+                    retval = format!("{}NITF::UDHD::{}\n", retval, key);
+                }
+                retval
+            }
+            None => retval,
+        };
         retval = format!("{}NITF::XHDL: {}\n", retval, &self.xhdl);
+        retval = match &self.xhdlofl {
+            Some(t) => format!("{}NITF::XHDLOFL: {}\n", retval, &t),
+            None => retval,
+        };
+        retval = match &self.xhd {
+            Some(t) => {
+                for (key, value) in &*t {
+                    retval = format!("{}NITF::XHD::{}\n", retval, key);
+                }
+                retval
+            }
+            None => retval,
+        };
         write!(f, "{}", retval)
     }
 }
@@ -215,11 +252,13 @@ impl fmt::Display for NitfFileHeader {
 
 fn nitf_parser(input: &[u8]) -> IResult<&[u8], Nitf> {
     let (input, header) = nitf_file_header_parser (input)?;
+
     let mut image_subheaders = Vec::new();
-    for is in 0..header.numi {
-        let (input, im_subheader) = nitf_image_subheader_parser (input)?;
-        image_subheaders.push(im_subheader);
-    }
+
+    // for is in 0..header.numi {
+    //     let (input, im_subheader) = nitf_image_subheader_parser (input)?;
+    //     image_subheaders.push(im_subheader);
+    // }
     Ok((input, Nitf {
         nitf_file_header: header,
         nitf_image_subheader: image_subheaders,
@@ -277,6 +316,7 @@ fn nitf_file_header_parser(input: &[u8]) -> IResult<&[u8], NitfFileHeader> {
         let (input, li_t) = take(10 as u64)(input)?;
         li.push(usize::from_str(std::str::from_utf8(&li_t).unwrap()).unwrap());
     }
+    let (input, _) = take(usize::from_str(std::str::from_utf8(&numi).unwrap()).unwrap()*16)(input)?;
 
     let (input, nums) = take(3 as u64)(input)?;
 
@@ -288,6 +328,7 @@ fn nitf_file_header_parser(input: &[u8]) -> IResult<&[u8], NitfFileHeader> {
         let (input, ls_t) = take(6 as u64)(input)?;
         ls.push(usize::from_str(std::str::from_utf8(&ls_t).unwrap()).unwrap());
     }
+    let (input, _) = take(usize::from_str(std::str::from_utf8(&nums).unwrap()).unwrap()*10)(input)?;
 
     let (input, numx) = take(3 as u64)(input)?;
 
@@ -301,6 +342,7 @@ fn nitf_file_header_parser(input: &[u8]) -> IResult<&[u8], NitfFileHeader> {
         let (input, lt_t) = take(5 as u64)(input)?;
         lt.push(usize::from_str(std::str::from_utf8(&lt_t).unwrap()).unwrap());
     }
+    let (input, _) = take(usize::from_str(std::str::from_utf8(&numt).unwrap()).unwrap()*9)(input)?;
 
     let (input, numdes) = take(3 as u64)(input)?;
 
@@ -312,6 +354,7 @@ fn nitf_file_header_parser(input: &[u8]) -> IResult<&[u8], NitfFileHeader> {
         let (input, ld_t) = take(9 as u64)(input)?;
         ld.push(usize::from_str(std::str::from_utf8(&ld_t).unwrap()).unwrap());
     }
+    let (input, _) = take(usize::from_str(std::str::from_utf8(&numdes).unwrap()).unwrap()*13)(input)?;
 
     let (input, numres) = take(3 as u64)(input)?;
 
@@ -324,6 +367,8 @@ fn nitf_file_header_parser(input: &[u8]) -> IResult<&[u8], NitfFileHeader> {
         lre.push(usize::from_str(std::str::from_utf8(&lre_t).unwrap()).unwrap());
     }
 
+    let (input, _) = take(usize::from_str(std::str::from_utf8(&numres).unwrap()).unwrap()*11)(input)?;
+
     let mut udhofl= None;
     let mut udhd = None;
 
@@ -331,9 +376,14 @@ fn nitf_file_header_parser(input: &[u8]) -> IResult<&[u8], NitfFileHeader> {
     if usize::from_str(std::str::from_utf8(&udhdl).unwrap()).unwrap() > 0 {
         let (input, udhofl_t) = take(3 as u64)(input)?;
         udhofl = Some(usize::from_str(std::str::from_utf8(&udhofl_t).unwrap()).unwrap());
-        let (input, udhd_t)
-            = take(usize::from_str(std::str::from_utf8(&udhdl).unwrap()).unwrap() - 3)(input)?;
-        udhd = Some(udhd_t.to_vec());
+        let mut udhd_map = HashMap::new();
+        let mut pointer = 3 as usize;
+        while pointer < udhofl.unwrap() {
+            let (input, (size,key,value)) = nitf_tre_parser(input)?;
+            udhd_map.insert(key, value);
+            pointer += size;
+        }
+        udhd = Some(udhd_map);
     }
 
     let mut xhdlofl = None;
@@ -343,9 +393,14 @@ fn nitf_file_header_parser(input: &[u8]) -> IResult<&[u8], NitfFileHeader> {
     if usize::from_str(std::str::from_utf8(&xhdl).unwrap()).unwrap() > 0 {
         let (input, xhdlofl_t) = take(3 as u64)(input)?;
         xhdlofl = Some(usize::from_str(std::str::from_utf8(&xhdlofl_t).unwrap()).unwrap());
-        let (input, xhd_t)
-            = take(usize::from_str(std::str::from_utf8(&xhdl).unwrap()).unwrap() - 3)(input)?;
-        xhd = Some(xhd_t.to_vec());
+        let mut xhd_map = HashMap::new();
+        let mut pointer = 3 as usize;
+        while pointer < xhdlofl.unwrap() {
+            let (input, (size,key,value)) = nitf_tre_parser(input)?;
+            xhd_map.insert(key, value);
+            pointer += size;
+        }
+        xhd = Some(xhd_map);
     }
 
     Ok((input, NitfFileHeader {
@@ -399,7 +454,7 @@ fn nitf_file_header_parser(input: &[u8]) -> IResult<&[u8], NitfFileHeader> {
         fsctln: std::str::from_utf8(&fsctln).unwrap().trim().parse().unwrap(),
         fscop: u32::from_str(std::str::from_utf8(&fscop).unwrap()).unwrap(),
         fscpys: u32::from_str(std::str::from_utf8(&fscpys).unwrap()).unwrap(),
-        encryp: encryp[0],
+        encryp: u8::from_str(std::str::from_utf8(&encryp).unwrap()).unwrap(),
         fbkgc_r: fbkgc_r[0],
         fbkgc_g: fbkgc_g[0],
         fbkgc_b: fbkgc_b[0],

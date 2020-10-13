@@ -1,6 +1,8 @@
 use std::env;
 
-use ossim_oxide::nitf::{Loadable, Nitf};
+use ossim_oxide::image::Loadable;
+use ossim_oxide::nitf::Nitf;
+
 
 fn main() {
     let args: Vec<String> = env::args().collect();
